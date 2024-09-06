@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Update</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            overflow: hidden; /* Ensure no scrollbars appear */
+        }
+
+        .loading-container {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .apple-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto 20px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #ff0000;
+            border-radius: 10px 0 0 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: load 10s linear forwards, reverseLoad 10s linear 10s forwards;
+        }
+
+        .progress img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: invert(100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        @keyframes load {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        @keyframes reverseLoad {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        .status-text {
+            font-size: 18px;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .jumpscare {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .jumpscare img {
+            width: 400px;
+            height: 400px;
+            filter: invert(100%);
+            animation: scare 1s infinite;
+        }
+
+        @keyframes scare {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            25% { transform: scale(1.2) rotate(15deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(30deg); opacity: 0.8; }
+            75% { transform: scale(1.2) rotate(45deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="apple-logo">
+        <div class="progress-bar">
+            <div class="progress">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo">
+            </div>
+        </div>
+        <div class="status-text">System Corrupted. Preparing the next phase...</div>
+    </div>
+
+    <div class="jumpscare">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo">
+    </div>
+
+    <script>
+        const progressBar = document.querySelector('.progress');
+        const jumpScareDiv = document.querySelector('.jumpscare');
+
+        progressBar.addEventListener('animationend', function() {
+            setTimeout(function() {
+                jumpScareDiv.style.display = 'flex';
+            }, 1000); // 1 second delay before jumpscare
+        });
+    </script>
+</body>
+</html>
